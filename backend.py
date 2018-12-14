@@ -74,24 +74,24 @@ def auth():
 			return response
 	return redirect(url_for('.login'))
 
-# Feed chickens
-@app.route('/feed/<str:from_email>/', methods=['GET'])
-@authentication.login_required
-@crossdomain(origin="*")
-def handler(from_email):
-    room_index = 0
-    appliance_index = 0
-
-    appliance = Appliance(rooms[room_index]['Appliances'][appliance_index])
-    appliance.executeAction(from_email)
-    templateData = {
-        'title' : 'WebGPIO',
-        'state' : appliance.getState(),
-        'room_index' : room_index,
-        'appliance_index' : appliance_index,
-        'name' : appliance.name
-    }
-    return render_template('button.html', **templateData)
+# # Feed chickens
+# @app.route('/feed/<str:from_email>/', methods=['GET'])
+# @authentication.login_required
+# @crossdomain(origin="*")
+# def handler(from_email):
+#     room_index = 0
+#     appliance_index = 0
+#
+#     appliance = Appliance(rooms[room_index]['Appliances'][appliance_index])
+#     appliance.executeAction(from_email)
+#     templateData = {
+#         'title' : 'WebGPIO',
+#         'state' : appliance.getState(),
+#         'room_index' : room_index,
+#         'appliance_index' : appliance_index,
+#         'name' : appliance.name
+#     }
+#     return render_template('button.html', **templateData)
 
 
 @app.route("/logout/")
