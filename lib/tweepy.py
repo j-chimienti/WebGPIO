@@ -12,9 +12,9 @@ auth.set_access_token(access_token, access_token_secret)
 twitter_api = tweepy.API(auth)
 
 
-def send(msg: str):
+def send(msg):
     return twitter_api.update(msg)
 
 
-def sendWithMedia(media: str, msg: str):
+def sendWithMedia(media, msg):
     return twitter_api.update_with_media(media, msg)

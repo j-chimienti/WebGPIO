@@ -47,7 +47,7 @@ class Appliance:
 			else:
 				return 0
 
-	def executeAction(self, email = None):
+	def executeAction(self):
 		if self.type == 'GPIO':
 			original_state= GPIO.input(self.pin)
 			new_state = 1 - original_state
