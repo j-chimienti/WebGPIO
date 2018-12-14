@@ -1,7 +1,11 @@
 ---
 Rooms:
-  - Name: Bed Room
+  - Name: Lights
     Appliances:
+      - Name: TEST 5 sec led
+        Type: GPIO
+        Pin: 18
+        Duration: 5
       - Name: Fan
         Type: GPIO
         Pin: 18
@@ -32,15 +36,17 @@ Rooms:
       - Name: Nginx
         Type: Script
         Status: sudo systemctl is-active --quiet nginx 2> /dev/null
-        Action: 
+        Action:
           On: sudo systemctl start nginx
           Off: sudo systemctl stop nginx
 
 
-#Settings:
+Settings:
+  GPIOMode: BOARD
+  Debug: True
+
 #  Host: 0.0.0.0
 #  Port: 8000
-#  Debug: True
 #  SSL:
 #    Enabled: False
 #    Path: default

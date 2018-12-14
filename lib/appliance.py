@@ -47,7 +47,7 @@ class Appliance:
 			else:
 				return 0
 
-	def executeAction(self):
+	def executeAction(self, email = None):
 		if self.type == 'GPIO':
 			original_state= GPIO.input(self.pin)
 			new_state = 1 - original_state
@@ -56,6 +56,7 @@ class Appliance:
 				time.sleep(self.attributes['Duration'])
 				GPIO.output(self.pin, original_state)
 		if self.type == 'Script' and self.action:
+
 			if self.getState():
 				subprocess.call([self.off_cmd], shell=True)
 			else:

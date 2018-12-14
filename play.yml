@@ -1,0 +1,4 @@
+---
+hosts: webgpio
+roles:
+  - setup

@@ -74,6 +74,26 @@ def auth():
 			return response
 	return redirect(url_for('.login'))
 
+# Feed chickens
+@app.route('/feed/<str:from_email>/', methods=['GET'])
+@authentication.login_required
+@crossdomain(origin="*")
+def handler(from_email):
+    room_index = 0
+    appliance_index = 0
+
+    appliance = Appliance(rooms[room_index]['Appliances'][appliance_index])
+    appliance.executeAction(from_email)
+    templateData = {
+        'title' : 'WebGPIO',
+        'state' : appliance.getState(),
+        'room_index' : room_index,
+        'appliance_index' : appliance_index,
+        'name' : appliance.name
+    }
+    return render_template('button.html', **templateData)
+
+
 @app.route("/logout/")
 def logout():
 	authentication.removeToken()
@@ -83,13 +103,13 @@ def logout():
 
 if __name__ == "__main__":
 	if settings['SSL']['Enabled']:
-		app.run(host = settings['Host'], 
-				port = settings['Port'], 
-				threaded = settings['Threaded'], 
-				debug = settings['Debug'], 
+		app.run(host = settings['Host'],
+				port = settings['Port'],
+				threaded = settings['Threaded'],
+				debug = settings['Debug'],
 				ssl_context = (settings['cerPath'], settings['keyPath']))
 	else:
-		app.run(host = settings['Host'], 
-				port = settings['Port'], 
-				threaded = settings['Threaded'], 
+		app.run(host = settings['Host'],
+				port = settings['Port'],
+				threaded = settings['Threaded'],
 				debug = settings['Debug'])
