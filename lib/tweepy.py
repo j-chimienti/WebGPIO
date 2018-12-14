@@ -11,6 +11,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 twitter_api = tweepy.API(auth)
 
+# http://docs.tweepy.org/en/v3.5.0/api.html#API.update_status
 
 def send(msg):
     return twitter_api.update(msg)
