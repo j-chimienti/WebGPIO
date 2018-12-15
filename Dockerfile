@@ -1,5 +1,6 @@
 FROM python:3.5
 WORKDIR /usr/src/app
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 COPY . .
-RUN python backend.py
+RUN python3 backend.py
